@@ -1,0 +1,40 @@
+//URL -> https://codeforces.com/contest/1294/problem/C
+
+#include <iostream>
+#include <vector>
+#include <cmath>
+using namespace std;
+ 
+bool findTriplets(int n, int &a, int &b, int &c) {
+    for (a = 2; a * a * a <= n; ++a) {
+        if (n % a == 0) {
+            int remaining = n / a;
+            for (b = a + 1; b * b <= remaining; ++b) {
+                if (remaining % b == 0) {
+                    c = remaining / b;
+                    if (c > b && c != a && c != b) {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    return false;
+}
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n; 
+        int a, b, c;
+        if (findTriplets(n, a, b, c)) {
+            cout << "YES\n";
+            cout << a << " " << b << " " << c << "\n";
+        } else {
+            cout << "NO\n";
+        }
+    } 
+    return 0;
+}
